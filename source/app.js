@@ -1,11 +1,38 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+const React = require('react')
+const ReactDOM = require('react-dom')
 
-var section = (
-  <section className='container'>
-    <h1 className='header'>This is React.js</h1>
-    <p className='content'>And this is how JSX works.</p>
-  </section>
-)
+class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isHeaderHidden: false
+    }
+    this.handleClick = this.handleClick.bind(this)
+  };
 
-ReactDOM.render(section, document.getElementById('react-application'))
+  handleClick (e) {
+    this.setState(prevState => {
+      return { isHeaderHidden: !prevState.isHeaderHidden }
+    })
+  };
+
+  render () {
+    let title = 'Stateful React Component'
+    let headerElement = <h1 className='header' key='header'>{ title }</h1>
+    let buttonElement = (
+      <button className='btn btn-default' onClick={this.handleClick} key='button'>
+        Toggle header
+      </button>
+    )
+
+    let fragment = [ buttonElement ]
+
+    if (!this.state.isHeaderHidden) {
+      fragment.push(headerElement)
+    }
+
+    return <div className='container'>{ fragment }</div>
+  }
+}
+
+ReactDOM.render(<Header />, document.getElementById('react-application'))
