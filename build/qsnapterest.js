@@ -20771,21 +20771,20 @@ module.exports = require('./lib/React');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var section = React.createElement(
-  'section',
-  { className: 'container' },
-  React.createElement(
-    'h1',
-    { className: 'header' },
-    'This is React.js'
-  ),
-  React.createElement(
-    'p',
-    { className: 'content' },
-    'And this is how JSX works.'
-  )
-);
+var ReactClass = React.createClass({
+  displayName: 'ReactClass',
 
-ReactDOM.render(section, document.getElementById('react-application'));
+  render: function render() {
+    if (this.props.isHidden) {
+      return null;
+    }
+
+    return React.createElement('h1', { className: 'header' }, this.props.header);
+  }
+});
+
+var reactComponentElement = React.createElement(ReactClass, { header: 'React Components', isHidden: true });
+
+ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
 },{"react":182,"react-dom":29}]},{},[183]);

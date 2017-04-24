@@ -1,11 +1,21 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
-var section = (
-  <section className='container'>
-    <h1 className='header'>This is React.js</h1>
-    <p className='content'>And this is how JSX works.</p>
-  </section>
+var ReactClass = React.createClass({
+  render: function () {
+    if (this.props.isHidden) {
+      return null
+    }
+
+    return React.createElement('h1',
+      { className: 'header' },
+      this.props.header)
+  }
+})
+
+var reactComponentElement = React.createElement(ReactClass,
+  { header: 'React Components', isHidden: false }
 )
 
-ReactDOM.render(section, document.getElementById('react-application'))
+ReactDOM.render(reactComponentElement,
+  document.getElementById('react-application'))
