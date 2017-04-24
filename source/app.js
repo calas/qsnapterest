@@ -1,20 +1,22 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 
-const ReactClass = React.createClass({
-  getInitialState: function () {
-    return {
+class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
       isHeaderHidden: false
     }
-  },
+    this.handleClick = this.handleClick.bind(this)
+  };
 
-  handleClick: function () {
-    this.setState({
-      isHeaderHidden: !this.state.isHeaderHidden
+  handleClick (e) {
+    this.setState(prevState => {
+      return { isHeaderHidden: !prevState.isHeaderHidden }
     })
-  },
+  };
 
-  render: function () {
+  render () {
     let title = 'Stateful React Component'
     let headerElement = <h1 className='header' key='header'>{ title }</h1>
     let buttonElement = (
@@ -31,9 +33,6 @@ const ReactClass = React.createClass({
 
     return <div className='container'>{ fragment }</div>
   }
-})
+}
 
-const reactComponentElement = React.createElement(ReactClass)
-
-ReactDOM.render(reactComponentElement,
-  document.getElementById('react-application'))
+ReactDOM.render(<Header />, document.getElementById('react-application'))

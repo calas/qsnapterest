@@ -20768,53 +20768,71 @@ module.exports = require('./lib/React');
 },{"./lib/React":158}],183:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var ReactClass = React.createClass({
-  displayName: 'ReactClass',
+var Header = function (_React$Component) {
+  _inherits(Header, _React$Component);
 
-  getInitialState: function getInitialState() {
-    return {
+  function Header(props) {
+    _classCallCheck(this, Header);
+
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.state = {
       isHeaderHidden: false
     };
-  },
-
-  handleClick: function handleClick() {
-    this.setState({
-      isHeaderHidden: !this.state.isHeaderHidden
-    });
-  },
-
-  render: function render() {
-    var title = 'Stateful React Component';
-    var headerElement = React.createElement(
-      'h1',
-      { className: 'header', key: 'header' },
-      title
-    );
-    var buttonElement = React.createElement(
-      'button',
-      { className: 'btn btn-default', onClick: this.handleClick, key: 'button' },
-      'Toggle header'
-    );
-
-    var fragment = [buttonElement];
-
-    if (!this.state.isHeaderHidden) {
-      fragment.push(headerElement);
-    }
-
-    return React.createElement(
-      'div',
-      { className: 'container' },
-      fragment
-    );
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
-});
 
-var reactComponentElement = React.createElement(ReactClass);
+  _createClass(Header, [{
+    key: 'handleClick',
+    value: function handleClick(e) {
+      this.setState(function (prevState) {
+        return { isHeaderHidden: !prevState.isHeaderHidden };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var title = 'Stateful React Component';
+      var headerElement = React.createElement(
+        'h1',
+        { className: 'header', key: 'header' },
+        title
+      );
+      var buttonElement = React.createElement(
+        'button',
+        { className: 'btn btn-default', onClick: this.handleClick, key: 'button' },
+        'Toggle header'
+      );
 
-ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
+      var fragment = [buttonElement];
+
+      if (!this.state.isHeaderHidden) {
+        fragment.push(headerElement);
+      }
+
+      return React.createElement(
+        'div',
+        { className: 'container' },
+        fragment
+      );
+    }
+  }]);
+
+  return Header;
+}(React.Component);
+
+ReactDOM.render(React.createElement(Header, null), document.getElementById('react-application'));
 
 },{"react":182,"react-dom":29}]},{},[183]);
