@@ -1,6 +1,9 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
-var element = React.createElement('h1')
+var reactElement = React.createElement('h1',
+  { className: 'header', key: 'header' },
+  'This is React.js'
+)
 
-ReactDOM.render(element, document.getElementById('react-application'))
+ReactDOM.render(reactElement, document.getElementById('react-application'))
