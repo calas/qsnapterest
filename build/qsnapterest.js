@@ -20775,11 +20775,17 @@ var ReactClass = React.createClass({
   displayName: 'ReactClass',
 
   render: function render() {
-    return React.createElement('h1', { className: 'header' }, 'React Component');
+    if (this.props.isHidden) {
+      return null;
+    }
+
+    var header = this.props.tweets.length + ' Latest Tweets';
+
+    return React.createElement('h1', { className: 'header' }, header);
   }
 });
 
-var reactComponentElement = React.createElement(ReactClass);
+var reactComponentElement = React.createElement(ReactClass, { tweets: { length: 3 }, isHidden: false });
 
 ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
