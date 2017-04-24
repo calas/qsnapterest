@@ -1,7 +1,9 @@
 const React = require('react')
 
 class Stream extends React.Component {
-  render () {}
+  render () {
+    return null
+  }
 }
 
 module.exports = Stream

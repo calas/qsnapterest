@@ -20892,7 +20892,9 @@ var Collection = function (_React$Component) {
 
   _createClass(Collection, [{
     key: 'render',
-    value: function render() {}
+    value: function render() {
+      return null;
+    }
   }]);
 
   return Collection;
@@ -20924,7 +20926,9 @@ var Stream = function (_React$Component) {
 
   _createClass(Stream, [{
     key: 'render',
-    value: function render() {}
+    value: function render() {
+      return null;
+    }
   }]);
 
   return Stream;

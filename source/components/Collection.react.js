@@ -1,7 +1,9 @@
 const React = require('react')
 
 class Collection extends React.Component {
-  render () { }
+  render () {
+    return null
+  }
 }
 
 module.exports = Collection
