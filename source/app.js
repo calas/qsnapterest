@@ -1,7 +1,7 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+const React = require('react')
+const ReactDOM = require('react-dom')
 
-var ReactClass = React.createClass({
+const ReactClass = React.createClass({
   getInitialState: function () {
     return {
       isHeaderHidden: false,
@@ -16,35 +16,24 @@ var ReactClass = React.createClass({
   },
 
   render: function () {
-    var headerElement = React.createElement(
-      'h1',
-      { className: 'header', key: 'header' },
-      this.state.title
+    let headerElement = <h1 className='header' key='header'>{ this.state.title }</h1>
+    let buttonElement = (
+      <button className='btn btn-default' onClick={this.handleClick} key='button'>
+        Toggle header
+      </button>
     )
 
-    var buttonElement = React.createElement(
-      'button',
-      {
-        className: 'btn btn-default',
-        onClick: this.handleClick,
-        key: 'button'
-      },
-      'Toggle header'
-    )
+    let fragment = [ buttonElement ]
 
-    var fragment = []
-
-    if (this.state.isHeaderHidden) {
-      fragment = [ buttonElement ]
-    } else {
-      fragment = [ buttonElement, headerElement ]
+    if (!this.state.isHeaderHidden) {
+      fragment.push(headerElement)
     }
 
-    return React.createElement('div', { className: 'container' }, fragment)
+    return <div className='container'>{ fragment }</div>
   }
 })
 
-var reactComponentElement = React.createElement(ReactClass)
+const reactComponentElement = React.createElement(ReactClass)
 
 ReactDOM.render(reactComponentElement,
   document.getElementById('react-application'))

@@ -20788,23 +20788,28 @@ var ReactClass = React.createClass({
   },
 
   render: function render() {
-    var headerElement = React.createElement('h1', { className: 'header', key: 'header' }, this.state.title);
+    var headerElement = React.createElement(
+      'h1',
+      { className: 'header', key: 'header' },
+      this.state.title
+    );
+    var buttonElement = React.createElement(
+      'button',
+      { className: 'btn btn-default', onClick: this.handleClick, key: 'button' },
+      'Toggle header'
+    );
 
-    var buttonElement = React.createElement('button', {
-      className: 'btn btn-default',
-      onClick: this.handleClick,
-      key: 'button'
-    }, 'Toggle header');
+    var fragment = [buttonElement];
 
-    var fragment = [];
-
-    if (this.state.isHeaderHidden) {
-      fragment = [buttonElement];
-    } else {
-      fragment = [buttonElement, headerElement];
+    if (!this.state.isHeaderHidden) {
+      fragment.push(headerElement);
     }
 
-    return React.createElement('div', { className: 'container' }, fragment);
+    return React.createElement(
+      'div',
+      { className: 'container' },
+      fragment
+    );
   }
 });
 
