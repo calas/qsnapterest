@@ -20774,8 +20774,14 @@ var ReactDOM = require('react-dom');
 var ReactClass = React.createClass({
   displayName: 'ReactClass',
 
+  getInitialState: function getInitialState() {
+    return {
+      isHidden: false
+    };
+  },
+
   render: function render() {
-    if (this.props.isHidden) {
+    if (this.state.isHidden) {
       return null;
     }
 
@@ -20785,7 +20791,7 @@ var ReactClass = React.createClass({
   }
 });
 
-var reactComponentElement = React.createElement(ReactClass, { tweets: [1, 2, 3, 4], isHidden: false });
+var reactComponentElement = React.createElement(ReactClass, { tweets: [1, 2, 3, 4] });
 
 ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
