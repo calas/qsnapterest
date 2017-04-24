@@ -20776,8 +20776,7 @@ var ReactClass = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      isHeaderHidden: false,
-      title: 'Stateful React Component'
+      isHeaderHidden: false
     };
   },
 
@@ -20788,10 +20787,11 @@ var ReactClass = React.createClass({
   },
 
   render: function render() {
+    var title = 'Stateful React Component';
     var headerElement = React.createElement(
       'h1',
       { className: 'header', key: 'header' },
-      this.state.title
+      title
     );
     var buttonElement = React.createElement(
       'button',

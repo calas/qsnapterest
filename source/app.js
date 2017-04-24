@@ -4,8 +4,7 @@ const ReactDOM = require('react-dom')
 const ReactClass = React.createClass({
   getInitialState: function () {
     return {
-      isHeaderHidden: false,
-      title: 'Stateful React Component'
+      isHeaderHidden: false
     }
   },
 
@@ -16,7 +15,8 @@ const ReactClass = React.createClass({
   },
 
   render: function () {
-    let headerElement = <h1 className='header' key='header'>{ this.state.title }</h1>
+    let title = 'Stateful React Component'
+    let headerElement = <h1 className='header' key='header'>{ title }</h1>
     let buttonElement = (
       <button className='btn btn-default' onClick={this.handleClick} key='button'>
         Toggle header
