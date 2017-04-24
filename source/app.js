@@ -3,19 +3,11 @@ var ReactDOM = require('react-dom')
 
 var ReactClass = React.createClass({
   render: function () {
-    if (this.props.isHidden) {
-      return null
-    }
-
-    return React.createElement('h1',
-      { className: 'header' },
-      this.props.header)
+    return React.createElement('h1', { className: 'header' }, 'React Component')
   }
 })
 
-var reactComponentElement = React.createElement(ReactClass,
-  { header: 'React Components', isHidden: false }
-)
+var reactComponentElement = React.createElement(ReactClass)
 
 ReactDOM.render(reactComponentElement,
   document.getElementById('react-application'))

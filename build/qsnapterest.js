@@ -20775,15 +20775,11 @@ var ReactClass = React.createClass({
   displayName: 'ReactClass',
 
   render: function render() {
-    if (this.props.isHidden) {
-      return null;
-    }
-
-    return React.createElement('h1', { className: 'header' }, this.props.header);
+    return React.createElement('h1', { className: 'header' }, 'React Component');
   }
 });
 
-var reactComponentElement = React.createElement(ReactClass, { header: 'React Components', isHidden: true });
+var reactComponentElement = React.createElement(ReactClass);
 
 ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
