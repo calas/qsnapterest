@@ -20785,7 +20785,7 @@ var ReactClass = React.createClass({
   }
 });
 
-var reactComponentElement = React.createElement(ReactClass, { tweets: { length: 3 }, isHidden: false });
+var reactComponentElement = React.createElement(ReactClass, { tweets: [1, 2, 3, 4], isHidden: false });
 
 ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 
