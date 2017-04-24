@@ -20776,22 +20776,39 @@ var ReactClass = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      isHidden: false
+      isHeaderHidden: false,
+      title: 'Stateful React Component'
     };
   },
 
+  handleClick: function handleClick() {
+    this.setState({
+      isHeaderHidden: !this.state.isHeaderHidden
+    });
+  },
+
   render: function render() {
-    if (this.state.isHidden) {
-      return null;
+    var headerElement = React.createElement('h1', { className: 'header', key: 'header' }, this.state.title);
+
+    var buttonElement = React.createElement('button', {
+      className: 'btn btn-default',
+      onClick: this.handleClick,
+      key: 'button'
+    }, 'Toggle header');
+
+    var fragment = [];
+
+    if (this.state.isHeaderHidden) {
+      fragment = [buttonElement];
+    } else {
+      fragment = [buttonElement, headerElement];
     }
 
-    var header = this.props.tweets.length + ' Latest Tweets';
-
-    return React.createElement('h1', { className: 'header' }, header);
+    return React.createElement('div', { className: 'container' }, fragment);
   }
 });
 
-var reactComponentElement = React.createElement(ReactClass, { tweets: [1, 2, 3, 4] });
+var reactComponentElement = React.createElement(ReactClass);
 
 ReactDOM.render(reactComponentElement, document.getElementById('react-application'));
 

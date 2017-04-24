@@ -4,24 +4,47 @@ var ReactDOM = require('react-dom')
 var ReactClass = React.createClass({
   getInitialState: function () {
     return {
-      isHidden: false
+      isHeaderHidden: false,
+      title: 'Stateful React Component'
     }
   },
 
+  handleClick: function () {
+    this.setState({
+      isHeaderHidden: !this.state.isHeaderHidden
+    })
+  },
+
   render: function () {
-    if (this.state.isHidden) {
-      return null
+    var headerElement = React.createElement(
+      'h1',
+      { className: 'header', key: 'header' },
+      this.state.title
+    )
+
+    var buttonElement = React.createElement(
+      'button',
+      {
+        className: 'btn btn-default',
+        onClick: this.handleClick,
+        key: 'button'
+      },
+      'Toggle header'
+    )
+
+    var fragment = []
+
+    if (this.state.isHeaderHidden) {
+      fragment = [ buttonElement ]
+    } else {
+      fragment = [ buttonElement, headerElement ]
     }
 
-    var header = this.props.tweets.length + ' Latest Tweets'
-
-    return React.createElement('h1', { className: 'header' }, header)
+    return React.createElement('div', { className: 'container' }, fragment)
   }
 })
 
-var reactComponentElement = React.createElement(ReactClass,
-  { tweets: [1, 2, 3, 4] }
-)
+var reactComponentElement = React.createElement(ReactClass)
 
 ReactDOM.render(reactComponentElement,
   document.getElementById('react-application'))
