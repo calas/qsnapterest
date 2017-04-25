@@ -28939,12 +28939,40 @@ var StreamTweet = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('[qSnapterest] StreamTweet: 4. Running componentDidMount()');
+      console.log('[qSnapterest] StreamTweet: 3. Running componentDidMount()');
 
       var componentDOMRepresentation = ReactDOM.findDOMNode(this);
 
       window.qsnapterest.headerHTML = componentDOMRepresentation.children[0].outerHTML;
       window.qsnapterest.tweetHTML = componentDOMRepresentation.children[1].outerHTML;
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log('[qSnapterest] StreamTweet: 4. Running componentWillReceiveProps()');
+
+      var currentTweetLength = this.props.tweet.text.length;
+      var nextTweetLength = nextProps.tweet.text.length;
+
+      var isNumberOfCharactersIncreasing = nextTweetLength > currentTweetLength;
+
+      this.setState({
+        numberOfCharactersIsIncreasing: isNumberOfCharactersIncreasing
+      });
+
+      var headerText = void 0;
+
+      if (isNumberOfCharactersIncreasing) {
+        headerText = 'Number of characters is increasing';
+      } else {
+        headerText = 'Latest public photo from Twitter';
+      }
+
+      // We call this twice for demonstration purposes only, to show that
+      // render() will not be triggered twice in this case.
+      this.setState({ headerText: headerText });
+
+      window.qsnapterest.numberOfReceivedTweets++;
     }
   }, {
     key: 'componentWillUnmount',
@@ -28956,7 +28984,7 @@ var StreamTweet = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('[qSnapterest] StreamTweet: 3. Running render()');
+      console.log('[qSnapterest] StreamTweet: Running render()');
 
       return React.createElement(
         'section',
