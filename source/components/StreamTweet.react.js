@@ -69,6 +69,15 @@ class StreamTweet extends React.Component {
     return (nextProps.tweet.text.length > 1)
   }
 
+  componentWillUpdate (nextProps, nextState) {
+    console.log('[qSnapterest] StreamTweet: 6. Running componentWillUpdate()')
+
+    // Do needed DOM preparations, if any. Do not call this.setState() at this
+    // point.
+    //
+    // render() method will run next.
+  }
+
   componentWillUnmount () {
     console.log('[qSnapterest] StreamTweet: 8. Running componentWillUnmount()')
 
