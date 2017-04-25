@@ -28975,6 +28975,13 @@ var StreamTweet = function (_React$Component) {
       window.qsnapterest.numberOfReceivedTweets++;
     }
   }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      console.log('[qSnapterest] StreamTweet: 5. Running shouldComponentUpdate()');
+
+      return nextProps.tweet.text.length > 1;
+    }
+  }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       console.log('[qSnapterest] StreamTweet: 8. Running componentWillUnmount()');

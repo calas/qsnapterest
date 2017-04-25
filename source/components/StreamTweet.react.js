@@ -63,6 +63,12 @@ class StreamTweet extends React.Component {
     window.qsnapterest.numberOfReceivedTweets++
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    console.log('[qSnapterest] StreamTweet: 5. Running shouldComponentUpdate()')
+
+    return (nextProps.tweet.text.length > 1)
+  }
+
   componentWillUnmount () {
     console.log('[qSnapterest] StreamTweet: 8. Running componentWillUnmount()')
 
