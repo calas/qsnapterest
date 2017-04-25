@@ -78,6 +78,12 @@ class StreamTweet extends React.Component {
     // render() method will run next.
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    console.log('[qSnapterest] StreamTweet: 7. Running componentDidUpdate()')
+
+    window.qsnapterest.numberOfDisplayedTweets++
+  }
+
   componentWillUnmount () {
     console.log('[qSnapterest] StreamTweet: 8. Running componentWillUnmount()')
 

@@ -28982,6 +28982,23 @@ var StreamTweet = function (_React$Component) {
       return nextProps.tweet.text.length > 1;
     }
   }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps, nextState) {
+      console.log('[qSnapterest] StreamTweet: 6. Running componentWillUpdate()');
+
+      // Do needed DOM preparations, if any. Do not call this.setState() at this
+      // point.
+      //
+      // render() method will run next.
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log('[qSnapterest] StreamTweet: 7. Running componentDidUpdate()');
+
+      window.qsnapterest.numberOfDisplayedTweets++;
+    }
+  }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       console.log('[qSnapterest] StreamTweet: 8. Running componentWillUnmount()');
