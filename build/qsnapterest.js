@@ -29448,6 +29448,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
+var Tweet = require('./Tweet.react');
+
+var listStyle = {
+  padding: '0'
+};
+
+var listItemStyle = {
+  display: 'inline-block',
+  listStyle: 'none'
+};
 
 var TweetList = function (_React$Component) {
   _inherits(TweetList, _React$Component);
@@ -29459,9 +29469,38 @@ var TweetList = function (_React$Component) {
   }
 
   _createClass(TweetList, [{
+    key: 'getListOfTweetIds',
+    value: function getListOfTweetIds() {
+      return Object.keys(this.props.tweets);
+    }
+  }, {
+    key: 'getTweetElement',
+    value: function getTweetElement(tweetId) {
+      var tweet = this.props.tweets[tweetId];
+      var handleRemoveTweetFromCollection = this.props.onRemoveTweetFromCollection;
+      var tweetElement = void 0;
+
+      if (handleRemoveTweetFromCollection) {
+        tweetElement = React.createElement(Tweet, { tweet: tweet, onImageClick: handleRemoveTweetFromCollection });
+      } else {
+        tweetElement = React.createElement(Tweet, { tweet: tweet });
+      }
+
+      return React.createElement(
+        'li',
+        { style: listItemStyle, key: tweet.id },
+        tweetElement
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return null;
+      var tweetElements = this.getListOfTweetIds().map(this.getTweetElement);
+      return React.createElement(
+        'ul',
+        { style: listStyle },
+        tweetElements
+      );
     }
   }]);
 
@@ -29470,4 +29509,4 @@ var TweetList = function (_React$Component) {
 
 module.exports = TweetList;
 
-},{"react":220}]},{},[241]);
+},{"./Tweet.react":248,"react":220}]},{},[241]);
