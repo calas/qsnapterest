@@ -28,12 +28,60 @@ class StreamTweet extends React.Component {
   }
 
   componentDidMount () {
-    console.log('[qSnapterest] StreamTweet: 4. Running componentDidMount()')
+    console.log('[qSnapterest] StreamTweet: 3. Running componentDidMount()')
 
     let componentDOMRepresentation = ReactDOM.findDOMNode(this)
 
     window.qsnapterest.headerHTML = componentDOMRepresentation.children[0].outerHTML
     window.qsnapterest.tweetHTML = componentDOMRepresentation.children[1].outerHTML
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('[qSnapterest] StreamTweet: 4. Running componentWillReceiveProps()')
+
+    let currentTweetLength = this.props.tweet.text.length
+    let nextTweetLength = nextProps.tweet.text.length
+
+    let isNumberOfCharactersIncreasing = (nextTweetLength > currentTweetLength)
+
+    this.setState({
+      numberOfCharactersIsIncreasing: isNumberOfCharactersIncreasing
+    })
+
+    let headerText
+
+    if (isNumberOfCharactersIncreasing) {
+      headerText = 'Number of characters is increasing'
+    } else {
+      headerText = 'Latest public photo from Twitter'
+    }
+
+    // We call this twice for demonstration purposes only, to show that
+    // render() will not be triggered twice in this case.
+    this.setState({ headerText: headerText })
+
+    window.qsnapterest.numberOfReceivedTweets++
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    console.log('[qSnapterest] StreamTweet: 5. Running shouldComponentUpdate()')
+
+    return (nextProps.tweet.text.length > 1)
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    console.log('[qSnapterest] StreamTweet: 6. Running componentWillUpdate()')
+
+    // Do needed DOM preparations, if any. Do not call this.setState() at this
+    // point.
+    //
+    // render() method will run next.
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    console.log('[qSnapterest] StreamTweet: 7. Running componentDidUpdate()')
+
+    window.qsnapterest.numberOfDisplayedTweets++
   }
 
   componentWillUnmount () {
@@ -43,7 +91,7 @@ class StreamTweet extends React.Component {
   }
 
   render () {
-    console.log('[qSnapterest] StreamTweet: 3. Running render()')
+    console.log('[qSnapterest] StreamTweet: Running render()')
 
     return (
       <section>
