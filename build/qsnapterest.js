@@ -28799,6 +28799,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 
+var headerStyle = {
+  fontSize: '16px',
+  fontWeight: '300',
+  display: 'inline-block',
+  margin: '20px 10px'
+};
+
 var Header = function (_React$Component) {
   _inherits(Header, _React$Component);
 
@@ -28813,7 +28820,7 @@ var Header = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'h2',
-        null,
+        { style: headerStyle },
         this.props.text
       );
     }
@@ -28821,6 +28828,10 @@ var Header = function (_React$Component) {
 
   return Header;
 }(React.Component);
+
+Header.defaultProps = {
+  text: 'Default header'
+};
 
 module.exports = Header;
 
