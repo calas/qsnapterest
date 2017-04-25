@@ -20768,6 +20768,15 @@ module.exports = require('./lib/React');
 },{"./lib/React":158}],183:[function(require,module,exports){
 'use strict';
 
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Application = require('./components/Application.react');
+
+ReactDOM.render(React.createElement(Application, null), document.getElementById('react-application'));
+
+},{"./components/Application.react":184,"react":182,"react-dom":29}],184:[function(require,module,exports){
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20777,62 +20786,154 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
-var ReactDOM = require('react-dom');
+var Stream = require('./Stream.react');
+var Collection = require('./Collection.react');
 
-var Header = function (_React$Component) {
-  _inherits(Header, _React$Component);
+var Application = function (_React$Component) {
+  _inherits(Application, _React$Component);
 
-  function Header(props) {
-    _classCallCheck(this, Header);
+  function Application(props) {
+    _classCallCheck(this, Application);
 
-    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this, props));
 
     _this.state = {
-      isHeaderHidden: false
+      collectionTweets: {}
     };
-    _this.handleClick = _this.handleClick.bind(_this);
+
+    _this.addTweetToCollection = _this.addTweetToCollection.bind(_this);
+    _this.removeTweetFromCollection = _this.removeTweetFromCollection.bind(_this);
+    _this.removeAllTweetsFromCollection = _this.removeAllTweetsFromCollection.bind(_this);
     return _this;
   }
 
-  _createClass(Header, [{
-    key: 'handleClick',
-    value: function handleClick(e) {
+  _createClass(Application, [{
+    key: 'addTweetToCollection',
+    value: function addTweetToCollection(tweet) {
       this.setState(function (prevState) {
-        return { isHeaderHidden: !prevState.isHeaderHidden };
+        var collectionTweets = prevState.collectionTweets;
+
+        collectionTweets[tweet.id] = tweet;
+
+        return { collectionTweets: collectionTweets };
+      });
+    }
+  }, {
+    key: 'removeTweetFromCollection',
+    value: function removeTweetFromCollection(tweet) {
+      this.setState(function (prevState) {
+        var collectionTweets = prevState.collectionTweets;
+
+        delete collectionTweets[tweet.id];
+
+        return { collectionTweets: collectionTweets };
+      });
+    }
+  }, {
+    key: 'removeAllTweetsFromCollection',
+    value: function removeAllTweetsFromCollection() {
+      this.setState(function (prevState) {
+        return { collectionTweets: {} };
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var title = 'Stateful React Component';
-      var headerElement = React.createElement(
-        'h1',
-        { className: 'header', key: 'header' },
-        title
-      );
-      var buttonElement = React.createElement(
-        'button',
-        { className: 'btn btn-default', onClick: this.handleClick, key: 'button' },
-        'Toggle header'
-      );
-
-      var fragment = [buttonElement];
-
-      if (!this.state.isHeaderHidden) {
-        fragment.push(headerElement);
-      }
-
       return React.createElement(
         'div',
-        { className: 'container' },
-        fragment
+        { className: 'container-fluid' },
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-md-4 text-center' },
+            React.createElement(Stream, { onAddTweetToCollection: this.addTweetToCollection })
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-md-8' },
+            React.createElement(Collection, {
+              tweets: this.state.collectionTweets,
+              onRemoveTweetFromCollection: this.removeTweetFromCollection,
+              onRemoveAllTweetsFromCollection: this.removeAllTweetsFromCollection })
+          )
+        )
       );
     }
   }]);
 
-  return Header;
+  return Application;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Header, null), document.getElementById('react-application'));
+module.exports = Application;
 
-},{"react":182,"react-dom":29}]},{},[183]);
+},{"./Collection.react":185,"./Stream.react":186,"react":182}],185:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var Collection = function (_React$Component) {
+  _inherits(Collection, _React$Component);
+
+  function Collection() {
+    _classCallCheck(this, Collection);
+
+    return _possibleConstructorReturn(this, (Collection.__proto__ || Object.getPrototypeOf(Collection)).apply(this, arguments));
+  }
+
+  _createClass(Collection, [{
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return Collection;
+}(React.Component);
+
+module.exports = Collection;
+
+},{"react":182}],186:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var Stream = function (_React$Component) {
+  _inherits(Stream, _React$Component);
+
+  function Stream() {
+    _classCallCheck(this, Stream);
+
+    return _possibleConstructorReturn(this, (Stream.__proto__ || Object.getPrototypeOf(Stream)).apply(this, arguments));
+  }
+
+  _createClass(Stream, [{
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return Stream;
+}(React.Component);
+
+module.exports = Stream;
+
+},{"react":182}]},{},[183]);
