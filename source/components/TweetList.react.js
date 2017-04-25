@@ -11,6 +11,11 @@ const listItemStyle = {
 }
 
 class TweetList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.getTweetElement = this.getTweetElement.bind(this)
+  }
+
   getListOfTweetIds () {
     return Object.keys(this.props.tweets)
   }

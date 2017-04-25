@@ -29462,10 +29462,13 @@ var listItemStyle = {
 var TweetList = function (_React$Component) {
   _inherits(TweetList, _React$Component);
 
-  function TweetList() {
+  function TweetList(props) {
     _classCallCheck(this, TweetList);
 
-    return _possibleConstructorReturn(this, (TweetList.__proto__ || Object.getPrototypeOf(TweetList)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (TweetList.__proto__ || Object.getPrototypeOf(TweetList)).call(this, props));
+
+    _this.getTweetElement = _this.getTweetElement.bind(_this);
+    return _this;
   }
 
   _createClass(TweetList, [{
