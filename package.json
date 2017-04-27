@@ -24,9 +24,18 @@
     "react-dom": "^15.5.4",
     "snapkite-stream-client": "^1.0.3"
   },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ]
+  },
   "standard": {
     "globals": [
-      "jest", "describe", "it", "expect"
+      "jest",
+      "describe",
+      "it",
+      "expect"
     ]
   }
 }
