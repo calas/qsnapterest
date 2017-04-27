@@ -4,7 +4,8 @@
   "description": "Snapterest example from _React Essentials_ book",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "gulp"
   },
   "author": "",
   "license": "ISC",
