@@ -4,7 +4,8 @@
   "description": "Snapterest example from _React Essentials_ book",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "gulp"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
     "gulp": "^3.9.1",
+    "jest-cli": "^19.0.2",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
@@ -21,5 +23,19 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "snapkite-stream-client": "^1.0.3"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "jest",
+      "describe",
+      "it",
+      "expect"
+    ]
   }
 }
