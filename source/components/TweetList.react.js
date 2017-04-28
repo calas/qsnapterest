@@ -1,5 +1,6 @@
 const React = require('react')
 const Tweet = require('./Tweet.react')
+const CollectionActionCreators = require('../actions/CollectionActionCreators')
 
 const listStyle = {
   padding: '0'
@@ -16,24 +17,23 @@ class TweetList extends React.Component {
     this.getTweetElement = this.getTweetElement.bind(this)
   }
 
+  removeTweetFromCollection (tweet) {
+    CollectionActionCreators.removeTweetFromCollection(tweet.id)
+  }
+
   getListOfTweetIds () {
     return Object.keys(this.props.tweets)
   }
 
   getTweetElement (tweetId) {
     let tweet = this.props.tweets[tweetId]
-    let handleRemoveTweetFromCollection = this.props.onRemoveTweetFromCollection
-    let tweetElement
+    let handleRemoveTweetFromCollection = this.removeTweetFromCollection
 
-    if (handleRemoveTweetFromCollection) {
-      tweetElement = (
+    return (
+      <li style={listItemStyle} key={tweet.id}>
         <Tweet tweet={tweet} onImageClick={handleRemoveTweetFromCollection} />
-      )
-    } else {
-      tweetElement = <Tweet tweet={tweet} />
-    }
-
-    return <li style={listItemStyle} key={tweet.id}>{tweetElement}</li>
+      </li>
+    )
   }
 
   render () {
