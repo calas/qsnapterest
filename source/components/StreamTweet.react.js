@@ -2,11 +2,13 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Header = require('./Header.react')
 const Tweet = require('./Tweet.react')
+const CollectionActionCreators = require('../actions/CollectionActionCreators')
 
 class StreamTweet extends React.Component {
   constructor (props) {
     console.log('[qSnapterest] StreamTweet: 1. Running constructor()')
     super(props)
+
     this.state = {
       numberOfCharactersIsIncreasing: null,
       headerText: null
@@ -90,13 +92,17 @@ class StreamTweet extends React.Component {
     delete window.qsnapterest
   }
 
+  addTweetToCollection (tweet) {
+    CollectionActionCreators.addTweetToCollection(tweet)
+  }
+
   render () {
     console.log('[qSnapterest] StreamTweet: Running render()')
 
     return (
       <section>
         <Header text={this.state.headerText} />
-        <Tweet tweet={this.props.tweet} onImageClick={this.props.onAddTweetToCollection} />
+        <Tweet tweet={this.props.tweet} onImageClick={this.addTweetToCollection} />
       </section>
     )
   }
