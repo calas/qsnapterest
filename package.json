@@ -4,6 +4,7 @@
   "description": "Snapterest example from _React Essentials_ book",
   "main": "index.js",
   "scripts": {
+    "start": "serve build",
     "test": "jest",
     "build": "gulp"
   },
@@ -16,6 +17,7 @@
     "browserify": "^14.3.0",
     "gulp": "^3.9.1",
     "jest-cli": "^19.0.2",
+    "serve": "^5.1.4",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
