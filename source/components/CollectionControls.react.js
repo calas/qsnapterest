@@ -55,7 +55,7 @@ class CollectionControls extends React.Component {
       <div>
         <Header text={this.getHeaderText()} />
         <Button label='Rename collection' handleClick={this.toggleEditCollectionName} />
-        <Button label='Empty collection' handleClick={this.onRemoveAllTweetsFromCollection} />
+        <Button label='Empty collection' handleClick={this.removeAllTweetsFromCollection} />
         <CollectionExportForm htmlMarkup={this.props.htmlMarkup} />
       </div>
     )

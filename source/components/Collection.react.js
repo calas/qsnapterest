@@ -32,7 +32,8 @@ class Collection extends React.Component {
   }
 
   createHtmlMarkupStringOfTweetList () {
-    let htmlString = ReactDOMServer.renderToStaticMarkup(<TweetList tweets={this.state.tweets} />)
+    let tweets = this.state.collectionTweets
+    let htmlString = ReactDOMServer.renderToStaticMarkup(<TweetList tweets={tweets} />)
 
     let htmlMarkup = {
       html: htmlString
